@@ -3,7 +3,8 @@ const route = express.Router()
 const multer = require("multer")
 
 
-const { CreateProduct, GetProduct, DeleteProduct } = require("../controller/ProductController")
+const { CreateProduct, GetProduct, DeleteProduct, AdminGetProduct, GetSingleProduct, GetSingelProduct } = require("../controller/ProductController")
+const Authorization = require("../middleware/Authorization")
 
 const upload  = multer({
     storage : multer.memoryStorage(),
@@ -12,8 +13,9 @@ const upload  = multer({
     }
 });
 
-route.post("/create",upload.array('images'),CreateProduct)
+route.post("/create",upload.array('images'),Authorization,CreateProduct)
 route.get("/get",GetProduct)
-route.delete("/delete/:id",DeleteProduct)     
+route.delete("/delete/:id",Authorization,DeleteProduct)     
+route.get("/admin-get",Authorization,AdminGetProduct)        
 
 module.exports = route

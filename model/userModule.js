@@ -2,7 +2,10 @@ const { DataTypes } = require('sequelize');
 const sequelize = require("../connection/Dbconnect");
 
 const UserTable = sequelize.define('user_table', {
-  // Model attributes are defined here
+  user_id: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+  },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -22,7 +25,7 @@ const UserTable = sequelize.define('user_table', {
         msg: 'Last name cannot be empty'
       }
     }
-    
+
   },
   email: {
     type: DataTypes.STRING,
@@ -52,10 +55,10 @@ const UserTable = sequelize.define('user_table', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-    
+
   }
 }, {
-  
+
 });
 
 module.exports = UserTable

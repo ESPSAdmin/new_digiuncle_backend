@@ -1,6 +1,7 @@
 const UserTable = require("../model/userModule")
 const bcrypt= require('bcrypt')
 const jwt = require("jsonwebtoken")
+const { v4: uuidv4 } = require('uuid');
 require("dotenv").config()
 
 
@@ -9,11 +10,12 @@ const saltRounds = 10;
 
  const CreateUser = async(req,res)=>{
     const data = req.body
+    console.log(data)
     try{
        
         const hashedPassword = await bcrypt.hash(data.password, saltRounds);
-        const result = await UserTable.create({...data,password:hashedPassword})
-        const token = jwt.sign({id:result.id},process.env.SECURE_KEY)
+        const result = await UserTable.create({...data,password:hashedPassword,user_id:uuidv4()})
+        const token = jwt.sign({id:result.user_id},process.env.SECURE_KEY)
         return res.status(201).json({
             message:"user created successful",
             result,
@@ -47,7 +49,7 @@ const LoginUser = async (req, res) => {
                 message:"Wrong password"
             })
         }
-        const token = jwt.sign({id:user.id},process.env.SECURE_KEY)
+        const token = jwt.sign({id:user.user_id},process.env.SECURE_KEY)
         return res.status(200).json({
             message:"user Login successful",
             token
@@ -81,10 +83,34 @@ const UpdateUser = async (req, res) => {
     }
 };
 
+const Getuser = async(req,res) => {
+    const {authorization} = req.headers
+    const auth = authorization?.split(" ")[1]
+    try{
+        const {id} =  jwt.verify(auth,process.env.SECURE_KEY)
+        if(!id){
+            return res.status(403).json({
+                message:"you are not authorize"
+            })
+        }
+        const getData = await UserTable.findAll({where:{user_id:id}})
+        return res.status(200).json({
+            message:"user data found",
+            data:JSON.stringify(getData)
+        })
+    }catch(err){
+        console.log("Get user Error")
+        return res.status(500).json({
+            message:"internal server error"
+        })
+    }
+}
+
 
 
 module.exports = {
     CreateUser,
     LoginUser,
-    UpdateUser
+    UpdateUser,
+    Getuser
 }
