@@ -62,11 +62,11 @@ const Product = sequelize.define('product_table', {
 
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
 
   },
   image: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
 
   }
 }, {

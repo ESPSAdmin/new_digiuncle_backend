@@ -14,6 +14,7 @@ const connect = require("./connection/MongoDb")
 const payement = require("./payements/Payements")
 const InformationRoute = require("./routes/Information")
 const Authorization = require("./middleware/Authorization")
+const Product_size = require("./routes/Product-size")
 
 
 connect()
@@ -31,7 +32,10 @@ app.use("/product",productRoute)
 app.use("/category",CategoryRoute)
 app.use("/cart",CartRoute)
 app.use("/information",InformationRoute)
+app.use("/product-size",Product_size)
 
+
+// payement routes
 app.post("/create-checkout-session",Authorization,payement)
 
 
