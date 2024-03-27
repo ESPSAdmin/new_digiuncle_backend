@@ -26,7 +26,7 @@ const saltRounds = 10;
         console.log("Create user error")
         return res.status(500).json({
             message:"internal server error",
-            error:err.errors[0].message
+            error:err
         })
     }
 }
@@ -52,7 +52,8 @@ const LoginUser = async (req, res) => {
         const token = jwt.sign({id:user.user_id},process.env.SECURE_KEY)
         return res.status(200).json({
             message:"user Login successful",
-            token
+            token,
+            data:user
         })
 
     

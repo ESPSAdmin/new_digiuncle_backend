@@ -6,6 +6,18 @@ const UserTable = sequelize.define('user_table', {
     type: DataTypes.STRING,
     primaryKey: true,
   },
+  type:{
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'type cannot be null'
+      },
+      notEmpty: {
+        msg: 'type name required'
+      }
+    }
+  },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
