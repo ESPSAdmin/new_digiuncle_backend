@@ -62,7 +62,7 @@ const DeliveredOrder = async(req,res)=>{
     }catch(err){
         console.log("Cancel ordere error ")
         return res.status(500).json({
-            message:"intrenal server error"
+            message:"intrenal server error",
         })
     }
 }

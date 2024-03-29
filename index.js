@@ -16,6 +16,7 @@ const InformationRoute = require("./routes/Information")
 const Authorization = require("./middleware/Authorization")
 const Product_size = require("./routes/Product-size")
 const OrderRoute = require("./routes/Order")
+const BannerRoute = require("./routes/Banner")
 
 
 connect()
@@ -35,6 +36,7 @@ app.use("/cart",CartRoute)
 app.use("/information",InformationRoute)
 app.use("/product-size",Product_size)
 app.use("/orders",OrderRoute)
+app.use("/banner",BannerRoute)
 
 
 // payement routes

@@ -12,19 +12,13 @@ const ProductSize = mongoose.Schema({
         required:true,
         allowNull:true
     },
-    Product_id:{
-        type:String,
-        required:true,
-        allowNull:true
-    },
-    Category_id:{
+    product_id:{
         type:String,
         required:true,
         allowNull:true
     },
     user_id:{
         type:String,
-        required:true,
         allowNull:true
     },
    

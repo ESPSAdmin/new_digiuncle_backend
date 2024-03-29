@@ -1,76 +1,107 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require("../connection/Dbconnect");
 
-const Product = sequelize.define('product_table', {
-  product_id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-  },
-  user_id:{
-    type: DataTypes.STRING,
+
+
+const mongoose = require('mongoose');
+
+
+const Product = mongoose.Schema({
+  user_id: {
+    type: String,
+    allowNull: true
   },
   name: {
-    type: DataTypes.STRING,
-
+    type: String,
+    allowNull: true
   },
   brand: {
-    type: DataTypes.STRING,
-
+    type: String,
+    
+    allowNull: true
   },
   IN_stock: {
-    type: DataTypes.INTEGER,
-
+    type: Number,
+    
+    allowNull: true
   },
-  selling_price: {
-    type: DataTypes.INTEGER,
-
+  product_color: {
+    type: String,
+    
+    allowNull: true
   },
   MRP_price: {
-    type: DataTypes.INTEGER,
-
+    type: Number,
+    
+    allowNull: true
   },
-  Product_color: {
-    type: DataTypes.STRING,
-
-  },
-  material: {
-    type: DataTypes.STRING,
-
-  },
-  Product_color: {
-    type: DataTypes.STRING,
-
+  selling_price: {
+    type: Number,
+    
+    allowNull: true
   },
   category: {
-    type: DataTypes.STRING,
-
+    type: String,
+    
+    allowNull: true
   },
-  length: {
-    type: DataTypes.INTEGER,
-
-  },
-  width: {
-    type: DataTypes.INTEGER,
-
-  },
-  height: {
-    type: DataTypes.INTEGER,
-
+  material: {
+    type: String,
+    
+    allowNull: true
   },
   weight: {
-    type: DataTypes.STRING,
-
+    type: String,
+    
+    allowNull: true
+  },
+  Dimension: {
+    type: String,
+    
+    allowNull: true
   },
   description: {
-    type: DataTypes.TEXT,
-
+    type: String,
+    
+    allowNull: true
   },
-  image: {
-    type: DataTypes.TEXT,
-
+  SKU_id: {
+    type: String,
+    
+    allowNull: true
+  },
+  HSN_code: {
+    type: String,
+    
+    allowNull: true
+  },
+  tax: {
+    type: Number,
+    allowNull: true
+  },
+  Local_charge: {
+    type: Number,
+    
+    allowNull: true
+  },
+  Zonal_charge: {
+    type: Number,
+    
+    allowNull: true
+  },
+  National_charges: {
+    type: Number,
+    
+    allowNull: true
+  },
+  image:{
+    type:[String]
   }
-}, {
+  
 
-});
+}, { timestamps: true })
 
-module.exports = Product;
+
+const Product_table = mongoose.model("Product_table", Product)
+
+module.exports = {
+  Product_table
+}

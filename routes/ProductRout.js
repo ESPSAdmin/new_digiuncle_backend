@@ -3,7 +3,7 @@ const route = express.Router()
 const multer = require("multer")
 
 
-const { CreateProduct, GetProduct, DeleteProduct, AdminGetProduct, GetSingleProduct, GetSingelProduct } = require("../controller/ProductController")
+const { CreateProduct, GetProduct, DeleteProduct, UpdateProduct, AdminGetProduct } = require("../controller/ProductController")
 const Authorization = require("../middleware/Authorization")
 
 const upload  = multer({
@@ -13,9 +13,10 @@ const upload  = multer({
     }
 });
 
-route.post("/create",upload.array('images'),Authorization,CreateProduct)
+route.post("/create",upload.array('image'),Authorization,CreateProduct)
+route.get("/get-admin",Authorization,AdminGetProduct)
 route.get("/get",GetProduct)
 route.delete("/delete/:id",Authorization,DeleteProduct)     
-route.get("/admin-get",Authorization,AdminGetProduct)        
+route.patch("/update/:id",UpdateProduct)            
 
 module.exports = route
