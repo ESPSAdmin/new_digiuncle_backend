@@ -94,7 +94,7 @@ const Getuser = async(req,res) => {
                 message:"you are not authorize"
             })
         }
-        const getData = await UserTable.findAll({where:{user_id:id}})
+        const getData = await UserTable.findOne({where:{user_id:id}})
         return res.status(200).json({
             message:"user data found",
             data:JSON.stringify(getData)

@@ -2,6 +2,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const app = express()
+const swaggerUi = require('swagger-ui-express');
 require("dotenv").config()
 
 // local imports 
@@ -17,6 +18,8 @@ const Authorization = require("./middleware/Authorization")
 const Product_size = require("./routes/Product-size")
 const OrderRoute = require("./routes/Order")
 const BannerRoute = require("./routes/Banner")
+const swaggerDocument = require('./swagger.json');
+
 
 
 connect()
@@ -53,7 +56,11 @@ app.listen(Port, () => {
     console.log(`Mysql Database is connected`);
 })
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/', (req, res) => {
     return res.send("hello world")
 })
+
+
+
